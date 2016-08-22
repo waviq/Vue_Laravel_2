@@ -10246,21 +10246,31 @@ var _vue2 = _interopRequireDefault(_vue);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-new _vue2.default({
-    el: 'body',
-    data: {
-        title: 'Welcome Vue Js',
-        name: '',
-        todo: [{ id: 1, agenda: 'Go to shopping', completed: true }, { id: 2, agenda: 'Go to Sleep', completed: false }],
-        MyAgenda: { id: null, agenda: '', completed: false }
+_vue2.default.component('todo-add', {
+    template: '#todoAdd-template',
 
+    data: function data() {
+        return {
+            MyAgenda: {}
+        };
     },
 
-    computed: {
-        toDoCount: function toDoCount() {
-            return this.todo.length;
+    methods: {
+        addNewTodo: function addNewTodo(newAgenda) {
+            this.todo.push(newAgenda);
+            this.MyAgenda = { id: null, agenda: '', completed: false };
         }
-    },
+    }
+}); /**
+     * Created by waviq on 20/08/2016.
+     */
+
+
+_vue2.default.component('todo-component', {
+    template: '#todoTemplate',
+
+    props: ['todoe', 'MyAgendae'],
+
     methods: {
         addNewAgenda: function addNewAgenda(newAgenda) {
             this.todo.push(newAgenda);
@@ -10272,11 +10282,33 @@ new _vue2.default({
         deleteTodo: function deleteTodo(todos) {
             this.todo.$remove(todos);
         }
+    },
+
+    data: function data() {
+        return {
+            title: 'Welcome Vue Js',
+            name: '',
+            todo: [{ id: 1, agenda: 'Go to shopping', completed: true }, { id: 2, agenda: 'Go to Sleep', completed: false }]
+
+        };
+    },
+    computed: {
+        toDoCount: function toDoCount() {
+            return this.todo.length;
+        }
+    }
+});
+
+new _vue2.default({
+    el: 'body',
+
+    watch: {
+        MyAgandae: function MyAgandae(newValue, oldValue) {
+            console.log(newValue);
+        }
     }
 
-}); /**
-     * Created by waviq on 20/08/2016.
-     */
+});
 
 },{"vue":2}]},{},[3]);
 

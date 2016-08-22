@@ -194,5 +194,6 @@
         </SOURCES>
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Vue_Laravel_2 node_modules" level="project" />
   </component>
 </module>
