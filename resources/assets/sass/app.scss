@@ -1,0 +1,12 @@
+//@import "node_modules/bootstrap-sass/assets/stylesheets/";
+//@import "~bootstrap-sass";
+//@import "../../../node_modules/bootstrap-sass/assets/stylesheets";
+.container{
+  padding: 3em;
+}
+li.completed{
+  text-decoration: line-through;
+}
+.margin-right-10{
+  margin-right: 10px;
+}
