@@ -13,6 +13,7 @@
         <div class="container">
 
             <todo-component :todoe="todo"></todo-component>
+            <todo-add :newTodo.sync="newTodo"></todo-add>
 
             <template id="todoTemplate">
                 <h1>@{{title}}</h1>
@@ -52,12 +53,12 @@
 
             </template>
 
-            <todo-add :MyAgendae.sync="MyAgenda"></todo-add>
+
             <template id="todoAdd-template">
-                <form v-on:submit.prevent="addNewTodo(newAgenda)">
+                <form v-on:submit.prevent="addNewTodo()">
                     <div class="form-group" >
                         <input type="text" class="form-control"
-                               v-model="MyAgenda.agenda"
+                               v-model="tempTodo.agenda"
                                placeholder="Masukan agenda baru"
 
                         />

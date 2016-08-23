@@ -10246,30 +10246,10 @@ var _vue2 = _interopRequireDefault(_vue);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_vue2.default.component('todo-add', {
-    template: '#todoAdd-template',
-
-    data: function data() {
-        return {
-            MyAgenda: {}
-        };
-    },
-
-    methods: {
-        addNewTodo: function addNewTodo(newAgenda) {
-            this.todo.push(newAgenda);
-            this.MyAgenda = { id: null, agenda: '', completed: false };
-        }
-    }
-}); /**
-     * Created by waviq on 20/08/2016.
-     */
-
-
-_vue2.default.component('todo-component', {
+var todoAgenda = _vue2.default.extend({
     template: '#todoTemplate',
 
-    props: ['todoe', 'MyAgendae'],
+    props: ['todoe'],
 
     methods: {
         addNewAgenda: function addNewAgenda(newAgenda) {
@@ -10297,13 +10277,42 @@ _vue2.default.component('todo-component', {
             return this.todo.length;
         }
     }
+}); /**
+     * Created by waviq on 20/08/2016.
+     */
+
+
+var todo_add = _vue2.default.extend({
+    template: '#todoAdd-template',
+
+    data: function data() {
+        return {
+            tempTodo: { id: null, agenda: '', completed: false }
+        };
+    },
+
+    props: ['newTodo'],
+
+    methods: {
+        addNewTodo: function addNewTodo() {
+            this.newTodo = this.tempTodo;
+            this.tempTodo = { id: null, agenda: '', completed: false };
+        }
+    }
 });
+
+_vue2.default.component('todo-add', todo_add);
+_vue2.default.component('todo-component', todoAgenda);
 
 new _vue2.default({
     el: 'body',
 
+    data: {
+        newTodo: {}
+    },
+
     watch: {
-        MyAgandae: function MyAgandae(newValue, oldValue) {
+        newTodo: function newTodo(newValue, oldValue) {
             console.log(newValue);
         }
     }

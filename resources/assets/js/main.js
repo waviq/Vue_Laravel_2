@@ -3,27 +3,10 @@
  */
 import Vue from "vue";
 
-Vue.component('todo-add',{
-    template:'#todoAdd-template',
-
-    data:function () {
-        return{
-            MyAgenda: {}
-        }
-    },
-
-    methods:{
-        addNewTodo(newAgenda){
-            this.todo.push(newAgenda);
-            this.MyAgenda = {id: null, agenda: '',completed:false}
-        }
-    }
-});
-
-Vue.component('todo-component',{
+var todoAgenda = Vue.extend({
     template:'#todoTemplate',
 
-    props:['todoe','MyAgendae'],
+    props:['todoe'],
 
     methods:{
         addNewAgenda(newAgenda){
@@ -56,15 +39,37 @@ Vue.component('todo-component',{
     },
 });
 
+var todo_add = Vue.extend({
+    template:'#todoAdd-template',
 
+    data:function () {
+        return{
+            tempTodo:{id:null, agenda:'', completed:false},
+        }
+    },
 
+    props:['newTodo'],
 
+    methods:{
+        addNewTodo(){
+            this.newTodo = this.tempTodo;
+            this.tempTodo = {id:null, agenda:'', completed:false};
+        }
+    }
+});
+
+Vue.component('todo-add',todo_add);
+Vue.component('todo-component',todoAgenda);
 
 new Vue({
     el: 'body',
 
+    data:{
+        newTodo: {}
+    },
+
     watch:{
-        MyAgandae(newValue, oldValue){
+        newTodo(newValue, oldValue){
             console.log(newValue);
         }
     }
